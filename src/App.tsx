@@ -217,15 +217,21 @@ function App() {
             "Java",
             "Spring boot",
             "Google Cloud Platform",
+            "BigQuery",
             "SQL / MySQL",
             "JavaScript (ES6+)",
             "TypeScript",
             "React",
             "Next.js",
             "Tailwind CSS",
+            "HTML5",
+            "CSS3",
             "Node.js",
             "Git",
             "API Rest",
+            "Agile Scrum",
+            "Jira",
+            "Python"
           ].map((skill) => (
             <div
               key={skill}
@@ -291,10 +297,10 @@ function App() {
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
                   <h3 className="text-xl font-bold text-white group-hover:text-jovy-lila transition-colors">Desarrollador Full Stack Java</h3>
                   <span className="inline-block px-3 py-1 bg-jovy-lila/10 text-jovy-lila text-xs font-bold border border-jovy-lila/20 rounded-full mt-2 md:mt-0 uppercase tracking-wider">
-                    Certificación Bootcamp
+                    Certificación Bootcamp 
                   </span>
                 </div>
-                <p className="text-slate-300 font-medium mb-2">Bootcamp Intensivo Banco de Chile - Skillnest</p>
+                <p className="text-slate-300 font-medium mb-2">Bootcamp Intensivo Banco de Chile - Skillnest | Medalla de oro 98/100</p>
                 <p className="text-slate-400 text-sm leading-relaxed mb-4">
                   Especialización en arquitectura backend empresarial. Desarrollo de APIs seguras y escalables utilizando el ecosistema Spring.
                 </p>
