@@ -1,11 +1,90 @@
 import { useState } from "react";
 
+// Componente para una tarjeta de experiencia/formación con efecto hover
+const Card = ({
+  icon,
+  title,
+  subtitle,
+  date,
+  description,
+  tags,
+  link,
+  distinction,
+}: any) => (
+  <div className="relative group p-[2px] rounded-2xl bg-gradient-to-r from-jovy-celeste via-white/10 to-jovy-lila opacity-90 hover:opacity-100 transition-all duration-300 hover:shadow-[0_0_30px_rgba(125,211,252,0.15)]">
+    <div className="bg-slate-900 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-start gap-6 relative h-full">
+      {/* Icono */}
+      <div className="flex-shrink-0 w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center border border-white/10 group-hover:scale-110 group-hover:bg-jovy-celeste/20 group-hover:border-jovy-celeste/50 transition-all duration-300">
+        <span className="text-3xl">{icon}</span>
+      </div>
+
+      {/* Detalles */}
+      <div className="flex-1 text-center md:text-left">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-2">
+          <h3 className="text-xl font-bold text-white group-hover:text-jovy-celeste transition-colors">
+            {title}
+          </h3>
+          <span className="inline-block px-3 py-1 bg-jovy-celeste/10 text-jovy-celeste text-xs font-bold border border-jovy-celeste/20 rounded-full mt-2 md:mt-0 uppercase tracking-wider">
+            {distinction || date}
+          </span>
+        </div>
+        <p className="text-slate-300 font-medium mb-2">{subtitle}</p>
+        <p className="text-slate-400 text-sm leading-relaxed mb-4">
+          {description}
+        </p>
+
+        {/* Badges */}
+        {tags && (
+          <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+            {/* Corrección de 'tag' implícitamente 'any' */}
+            {tags.map((tag: string) => (
+              <span
+                key={tag}
+                className="px-2 py-1 text-xs text-slate-300 bg-slate-800/50 rounded border border-slate-700"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
+        {/* Link */}
+        {link && (
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-block text-jovy-lila hover:text-white transition text-sm font-medium"
+          >
+            Ver Proyecto →
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+);
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Definición de colores para Tailwind (asumiendo que estos se cargan)
+  const customColors = {
+    "jovy-bg": "#0f172a",
+    "jovy-lila": "#d8b4fe",
+    "jovy-celeste": "#7dd3fc",
+  };
+
+  // Corrección para el error de propiedades desconocidas en 'style'
+  const rootStyle = {
+    "--color-jovy-bg": customColors["jovy-bg"],
+    "--color-jovy-lila": customColors["jovy-lila"],
+    "--color-jovy-celeste": customColors["jovy-celeste"],
+  } as React.CSSProperties; // Usamos un Type Assertion más específico
+
   return (
-    // Usamos tu fondo oscuro base, pero con selección de texto lila
-    <div className="min-h-screen font-sans bg-jovy-bg text-slate-300 selection:bg-jovy-lila selection:text-slate-900">
+    <div
+      style={rootStyle}
+      className="min-h-screen font-sans bg-jovy-bg text-slate-300 selection:bg-jovy-lila selection:text-slate-900"
+    >
       {/* --- NAV --- */}
       <nav className="fixed w-full backdrop-blur-md bg-jovy-bg/80 border-b border-white/5 z-50">
         <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -16,6 +95,12 @@ function App() {
 
           {/* Menu Desktop */}
           <div className="hidden md:flex space-x-8 text-sm font-medium">
+            <a
+              href="#experiencia"
+              className="hover:text-jovy-celeste transition-colors duration-300"
+            >
+              Experiencia
+            </a>
             <a
               href="#proyectos"
               className="hover:text-jovy-lila transition-colors duration-300"
@@ -29,8 +114,14 @@ function App() {
               Stack
             </a>
             <a
-              href="#contacto"
+              href="#formacion"
               className="hover:text-jovy-lila transition-colors duration-300"
+            >
+              Formación
+            </a>
+            <a
+              href="#contacto"
+              className="hover:text-jovy-celeste transition-colors duration-300"
             >
               Contacto
             </a>
@@ -49,11 +140,32 @@ function App() {
         {isMenuOpen && (
           <div className="md:hidden bg-jovy-bg border-b border-white/5 p-4 space-y-4 text-center">
             <a
+              href="#experiencia"
+              className="block hover:text-jovy-celeste"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Experiencia
+            </a>
+            <a
               href="#proyectos"
               className="block hover:text-jovy-lila"
               onClick={() => setIsMenuOpen(false)}
             >
               Proyectos
+            </a>
+            <a
+              href="#habilidades"
+              className="block hover:text-jovy-celeste"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Stack
+            </a>
+            <a
+              href="#formacion"
+              className="block hover:text-jovy-lila"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Formación
             </a>
             <a
               href="#contacto"
@@ -65,21 +177,24 @@ function App() {
           </div>
         )}
       </nav>
-
-      {/* --- HERO SECTION --- */}
+      {/* --- HERO SECTION (ACTUALIZADO) --- */}
       <header className="pt-44 pb-20 px-6 max-w-6xl mx-auto">
-        <div className="max-w-3xl">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 tracking-tight">
-            Hola, soy{" "}
+        <div className="max-w-4xl">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+            Hola 🌎, soy{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-jovy-celeste via-jovy-lila to-purple-400">
               Jovy
             </span>
           </h1>
+
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-6 tracking-tight">
+            Desarrolladora Full Stack Java & Cloud (GCP)
+          </h2>
           <p className="text-xl text-slate-400 mb-8 leading-relaxed">
-            Desarrolladora Web Full Stack. Transformo ideas complejas en
-            experiencias digitales{" "}
-            <span className="text-jovy-lila font-medium">elegantes</span> y{" "}
-            <span className="text-jovy-celeste font-medium">escalables</span>.
+            Transformo ideas complejas en soluciones{" "}
+            <strong>Spring Boot</strong> seguras, respaldadas por experiencia
+            profesional en <strong>IBM</strong> y <strong>Google Cloud</strong>.
+            Lista para construir Backend y Frontend escalables.
           </p>
           <div className="flex flex-wrap gap-4">
             {/* Botón Principal Lila Pastel */}
@@ -101,20 +216,59 @@ function App() {
           </div>
         </div>
       </header>
+      {/* // --- SECCIÓN ACERCA DE MÍ --- */}
+      <section
+        id="acerca-de"
+        className="py-12 px-6 max-w-6xl mx-auto border-t border-white/5"
+      >
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-bold text-white mb-6">Acerca de Mí</h2>
 
-      {/* --- PROYECTOS --- */}
+          {/* Párrafo 1: Visión y Filosofía (Con borde lateral)*/}
+          <p className="text-xl text-slate-300 leading-relaxed border-l-4 border-jovy-lila pl-4 italic">
+            Desarrolladora Full Stack Junior (Java/Spring) con una visión única
+            sobre cómo la tecnología se integra al negocio. Mi enfoque no solo
+            está en construir sistemas complejos, sino en asegurar que sean
+            <strong> funcionales, fáciles de comprender</strong> y centrados en
+            la experiencia del usuario final.
+          </p>
+
+          {/* Párrafo 2: El Diferenciador (IBM/Cloud)*/}
+          <p className="text-lg text-slate-400 leading-relaxed mt-6">
+            <strong className="text-white">Mi Diferenciador:</strong> Mi
+            trayectoria me ha enseñado el valor real de los datos, gracias a mi
+            práctica en <strong>IBM</strong> con Google Cloud (GCP) y BigQuery.
+            Esta experiencia me permite enfocar cada línea de código de Spring
+            Boot con una perspectiva analítica y una intensa{" "}
+            <strong> atención al detalle</strong>.
+          </p>
+
+          {/* Párrafo 3: Compromiso y Metas (Excelencia)*/}
+          <p className="text-lg text-slate-400 leading-relaxed mt-4">
+            <strong className="text-white">
+              Compromiso con la Excelencia:
+            </strong>{" "}
+            Me motivan profundamente los desafíos y la curiosidad me impulsa a
+            investigar hasta alcanzar la excelencia. Este compromiso se refleja
+            en mis logros académicos (Distinción Máxima) y en mi certificación
+            Full Stack (Medalla de Oro 98/100). Mi objetivo es claro: integrarme
+            a un equipo estable donde pueda{" "}
+            <strong>aportar ideas frescas</strong> y continuar aplicando
+            soluciones creativas.
+          </p>
+        </div>
+      </section>
+      {/* --- PROYECTOS (Mantenido y Titulado) --- */}
       <section id="proyectos" className="py-20 px-6 max-w-6xl mx-auto">
         <div className="flex items-center mb-12">
-          {/* Línea decorativa celeste */}
           <span className="w-12 h-1 bg-gradient-to-r from-jovy-celeste to-jovy-lila mr-4 rounded-full"></span>
           <h2 className="text-3xl font-bold text-white">
             Proyectos Destacados
           </h2>
         </div>
 
-        {/* TARJETA DEL PROYECTO ESTRELLA */}
+        {/* TARJETA DEL PROYECTO ESTRELLA (PLATAFORMA DE NOTICIAS) */}
         <div className="group relative bg-slate-900/50 border border-white/10 rounded-3xl overflow-hidden hover:border-jovy-lila/50 transition-all duration-500 shadow-xl">
-          {/* Glow effect detrás de la tarjeta */}
           <div className="absolute -inset-1 bg-gradient-to-r from-jovy-celeste to-jovy-lila opacity-10 group-hover:opacity-20 blur transition duration-500"></div>
 
           <div className="relative p-8 md:p-12 bg-slate-900/90 h-full rounded-3xl">
@@ -136,14 +290,14 @@ function App() {
                   logrando un rendimiento excepcional y diseño responsive.
                 </p>
 
-                {/* Arquitectura Grid - Estilo más suave */}
+                {/* Arquitectura Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                   <div className="bg-white/5 p-4 rounded-2xl border border-white/5 hover:border-jovy-celeste/30 transition">
                     <h4 className="text-jovy-celeste text-sm font-bold mb-1">
                       Frontend
                     </h4>
                     <p className="text-sm text-slate-400">
-                      Next.js 15 + TypeScript
+                      Next.js 15 + TypeScript (Librería React)
                     </p>
                   </div>
                   <div className="bg-white/5 p-4 rounded-2xl border border-white/5 hover:border-jovy-lila/30 transition">
@@ -159,12 +313,12 @@ function App() {
                       Styling
                     </h4>
                     <p className="text-sm text-slate-400">
-                      Tailwind CSS (Dark Mode)
+                      Tailwind CSS (Diseño Responsivo)
                     </p>
                   </div>
                   <div className="bg-white/5 p-4 rounded-2xl border border-white/5 hover:border-emerald-300/30 transition">
                     <h4 className="text-emerald-300 text-sm font-bold mb-1">
-                      Coste
+                      Coste Operativo
                     </h4>
                     <p className="text-sm text-slate-400">
                       $0/mes (Infraestructura Google)
@@ -206,7 +360,51 @@ function App() {
           </div>
         </div>
       </section>
+      {/* --- EXPERIENCIA PROFESIONAL (NUEVA SECCIÓN) --- */}
+      <section
+        id="experiencia"
+        className="py-20 px-6 max-w-6xl mx-auto border-t border-white/5"
+      >
+        <div className="flex items-center mb-12">
+          <span className="w-12 h-1 bg-gradient-to-r from-jovy-lila to-jovy-celeste mr-4 rounded-full"></span>
+          <h2 className="text-3xl font-bold text-white">
+            Experiencia Profesional (IBM & Cloud)
+          </h2>
+        </div>
 
+        <div className="max-w-4xl mx-auto space-y-12">
+          {/* Tarjeta IBM - Prácticante de Ingeniería de Datos */}
+          <Card
+            icon="☁️"
+            title="Prácticante de Ingeniería de Datos"
+            subtitle="IBM (Proyecto cliente Softys) | Ago 2024 – Ene 2025"
+            distinction="Cloud & Data"
+            description="Participación activa en la migración de datos de gran volumen, validando la integridad del proceso en la infraestructura Cloud."
+            tags={[
+              "GCP",
+              "BigQuery",
+              "SQL Avanzado",
+              "SAP HANA",
+              "SCRUM",
+              "Python",
+            ]}
+            date={null}
+            link={null}
+          />
+
+          {/* Tarjeta IBM - Analista de Documentación */}
+          <Card
+            icon="💼"
+            title="Analista de Documentación"
+            subtitle="IBM (Back Office / PMO) | Feb 2025 – May 2025"
+            distinction="Gestión & PMO"
+            description="Soporte al Project Management Office (PMO), garantizando la correcta documentación y cumplimiento normativo de contratos y procedimientos internos."
+            tags={["Documentación", "Contratos", "Procedimientos Internos"]}
+            date={null}
+            link={null}
+          />
+        </div>
+      </section>
       {/* --- SKILLS --- */}
       <section id="habilidades" className="py-20 px-6 max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold text-white mb-8 text-center">
@@ -214,47 +412,46 @@ function App() {
         </h2>
         <div className="flex flex-wrap justify-center gap-4">
           {[
-            "Java",
-            "Spring boot",
-            "Google Cloud Platform",
+            "Java (Spring Boot)",
+            "API REST",
+            "GCP (Google Cloud)",
             "BigQuery",
-            "SQL / MySQL",
-            "JavaScript (ES6+)",
-            "TypeScript",
-            "React",
             "Next.js",
+            "TypeScript",
             "Tailwind CSS",
-            "HTML5",
-            "CSS3",
-            "Node.js",
-            "Git",
-            "API Rest",
+            "SQL / MySQL",
+            "JPA / Hibernate",
+            "JavaScript (ES6+)",
+            "React",
             "Agile Scrum",
-            "Jira",
-            "Python"
-          ].map((skill) => (
-            <div
-              key={skill}
-              className="px-6 py-3 bg-slate-800/50 rounded-full border border-slate-700 hover:border-jovy-lila hover:bg-slate-800 transition-all duration-300 cursor-default hover:shadow-[0_0_15px_rgba(216,180,254,0.2)]"
-            >
-              <span className="text-slate-300 font-medium group-hover:text-white">
-                {skill}
-              </span>
-            </div>
-          ))}
+            "Git / GitHub",
+            "Python",
+          ].map(
+            (
+              skill: string // Corrección de 'skill' implícitamente 'any'
+            ) => (
+              <div
+                key={skill}
+                className="px-6 py-3 bg-slate-800/50 rounded-full border border-slate-700 hover:border-jovy-lila hover:bg-slate-800 transition-all duration-300 cursor-default hover:shadow-[0_0_15px_rgba(216,180,254,0.2)]"
+              >
+                <span className="text-slate-300 font-medium group-hover:text-white">
+                  {skill}
+                </span>
+              </div>
+            )
+          )}
         </div>
       </section>
-
-{/* --- FORMACIÓN & CERTIFICACIONES (Diseño Unificado) --- */}
+      {/* --- FORMACIÓN & CERTIFICACIONES (ACTUALIZADO) --- */}
       <section className="py-20 px-6 max-w-6xl mx-auto border-t border-white/5">
-        <h2 className="text-3xl font-bold text-white mb-12 text-center">Formación Académica</h2>
-        
+        <h2 className="text-3xl font-bold text-white mb-12 text-center">
+          Formación Académica
+        </h2>
+
         <div className="max-w-4xl mx-auto space-y-8">
-          
           {/* 1. Título de Analista Programador */}
           <div className="relative group p-[2px] rounded-2xl bg-gradient-to-r from-jovy-celeste via-white/10 to-jovy-lila opacity-90 hover:opacity-100 transition-all duration-300 hover:shadow-[0_0_30px_rgba(125,211,252,0.15)]">
             <div className="bg-slate-900 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 relative h-full">
-              
               {/* Icono */}
               <div className="flex-shrink-0 w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center border border-white/10 group-hover:scale-110 group-hover:bg-jovy-celeste/20 group-hover:border-jovy-celeste/50 transition-all duration-300">
                 <span className="text-3xl">📜</span>
@@ -263,21 +460,33 @@ function App() {
               {/* Detalles */}
               <div className="flex-1 text-center md:text-left">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
-                  <h3 className="text-xl font-bold text-white group-hover:text-jovy-celeste transition-colors">Analista Programador</h3>
+                  <h3 className="text-xl font-bold text-white group-hover:text-jovy-celeste transition-colors">
+                    Analista Programador
+                  </h3>
                   <span className="inline-block px-3 py-1 bg-jovy-celeste/10 text-jovy-celeste text-xs font-bold border border-jovy-celeste/20 rounded-full mt-2 md:mt-0 uppercase tracking-wider">
                     Título Profesional
                   </span>
                 </div>
-                <p className="text-slate-300 font-medium mb-2">Instituto Profesional (Santo Tomás)</p>
-                <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                  Formación integral en ingeniería de software. Bases sólidas en lógica, estructuras de datos, modelado UML y gestión de proyectos TI.
+                <p className="text-slate-300 font-medium mb-2">
+                  Instituto Profesional (Santo Tomás) | Distinción Máxima (promedio 6.4)
                 </p>
-                
+                <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                  Formación integral en ingeniería de software. Bases sólidas en
+                  lógica, estructuras de datos, modelado UML y gestión de
+                  proyectos TI.
+                </p>
+
                 {/* Badges */}
                 <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                  <span className="px-2 py-1 text-xs text-slate-300 bg-slate-800/50 border border-slate-700 rounded">Ingeniería de Software</span>
-                  <span className="px-2 py-1 text-xs text-slate-300 bg-slate-800/50 border border-slate-700 rounded">Bases de Datos</span>
-                  <span className="px-2 py-1 text-xs text-slate-300 bg-slate-800/50 border border-slate-700 rounded">Gestión Ágil</span>
+                  <span className="px-2 py-1 text-xs text-slate-300 bg-slate-800/50 border border-slate-700 rounded">
+                    Ingeniería de Software
+                  </span>
+                  <span className="px-2 py-1 text-xs text-slate-300 bg-slate-800/50 border border-slate-700 rounded">
+                    Bases de Datos
+                  </span>
+                  <span className="px-2 py-1 text-xs text-slate-300 bg-slate-800/50 border border-slate-700 rounded">
+                    Gestión Ágil
+                  </span>
                 </div>
               </div>
             </div>
@@ -286,7 +495,6 @@ function App() {
           {/* 2. Certificación Java */}
           <div className="relative group p-[2px] rounded-2xl bg-gradient-to-r from-jovy-lila via-white/10 to-jovy-celeste opacity-90 hover:opacity-100 transition-all duration-300 hover:shadow-[0_0_30px_rgba(216,180,254,0.15)]">
             <div className="bg-slate-900 rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center gap-6 relative h-full">
-              
               {/* Icono */}
               <div className="flex-shrink-0 w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center border border-white/10 group-hover:scale-110 group-hover:bg-jovy-lila/20 group-hover:border-jovy-lila/50 transition-all duration-300">
                 <span className="text-3xl">🎓</span>
@@ -295,20 +503,35 @@ function App() {
               {/* Detalles */}
               <div className="flex-1 text-center md:text-left">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
-                  <h3 className="text-xl font-bold text-white group-hover:text-jovy-lila transition-colors">Desarrollador Full Stack Java</h3>
+                  <h3 className="text-xl font-bold text-white group-hover:text-jovy-lila transition-colors">
+                    Desarrollador Full Stack Java
+                  </h3>
                   <span className="inline-block px-3 py-1 bg-jovy-lila/10 text-jovy-lila text-xs font-bold border border-jovy-lila/20 rounded-full mt-2 md:mt-0 uppercase tracking-wider">
-                    Certificación Bootcamp 
+                    Certificación Bootcamp
                   </span>
                 </div>
-                <p className="text-slate-300 font-medium mb-2">Bootcamp Intensivo Banco de Chile - Skillnest | Medalla de oro 98/100</p>
-                <p className="text-slate-400 text-sm leading-relaxed mb-4">
-                  Especialización en arquitectura backend empresarial. Desarrollo de APIs seguras y escalables utilizando el ecosistema Spring.
+                <p className="text-slate-300 font-medium mb-2">
+                  Bootcamp Intensivo Banco de Chile - Skillnest | Medalla de oro (98/100)
                 </p>
-                
+                <p className="text-slate-400 text-sm leading-relaxed mb-4">
+                  Especialización en arquitectura backend empresarial.
+                  Desarrollo de APIs seguras y escalables utilizando el
+                  ecosistema Spring.
+                </p>
+
                 {/* Badges */}
                 <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-                  {['Java 17', 'Spring Boot', 'Spring Security', 'JPA / Hibernate', 'MySQL'].map((tech) => (
-                    <span key={tech} className="px-2 py-1 text-xs text-slate-300 bg-slate-800/50 rounded border border-slate-700">
+                  {[
+                    "Java 17",
+                    "Spring Boot",
+                    "Spring Security",
+                    "JPA / Hibernate",
+                    "MySQL",
+                  ].map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-1 text-xs text-slate-300 bg-slate-800/50 rounded border border-slate-700"
+                    >
                       {tech}
                     </span>
                   ))}
@@ -316,10 +539,8 @@ function App() {
               </div>
             </div>
           </div>
-
         </div>
       </section>
-
       {/* --- CONTACTO --- */}
       <section
         id="contacto"
@@ -341,7 +562,6 @@ function App() {
           </a>
         </div>
       </section>
-
       <footer className="py-8 text-center text-slate-500 text-sm border-t border-white/5">
         <p>&copy; {new Date().getFullYear()} JovyJS. Hecho con 💜 y React.</p>
       </footer>
