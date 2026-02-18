@@ -35,5 +35,38 @@ src/
 public/
 ├── CNAME            # Configuración de dominio personalizado
 └── favicon.svg      # Branding
+```
+<img width="1150" height="908" alt="Vista Previa del Proyecto" src="https://github.com/user-attachments/assets/a8f15f4f-6667-4bdb-9b85-01eaf6fe5e5c" />
 
+## 🚀 Instalación y Uso Local
+Si quieres clonar y ejecutar este proyecto en tu máquina local:
+
+Clonar el repositorio:
+Bash
+```bash
+git clone https://github.com/jovyscript/portafolio-jovyjs.git
+cd portafolio-jovyjs
+```
+Instalar dependencias:
+Bash
+```bash
+npm install
+```
+Ejecutar servidor de desarrollo:
+Bash
+```bash
+npm run dev
+```
+Construir para producción:
+Bash
+```bash
+npm run build
+```
+---
+👩‍💻 Autora
+JovyJS - Desarrolladora Full Stack & Analista
+📧 Contacto: hello@jovyjs.com
+🌐 Web: www.jovyjs.com
+
+Hecho con 💜 y mucho café.
 
