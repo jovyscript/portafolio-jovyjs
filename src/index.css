@@ -6,3 +6,53 @@ body {
   background-color: #0f172a; /* Fondo azul oscuro */
   color: #e2e8f0;
 }
+/* 🪻 Personalización de Swiper🪻 */
+
+/* 1. Apagamos la flecha extra que creamos para quitar el efecto "doble" */
+.jovy-swiper .swiper-button-next::after,
+.jovy-swiper .swiper-button-prev::after {
+  display: none !important;
+}
+
+/* 2. Coloreamos la flecha original (SVG) y le damos forma a la caja oscura */
+.jovy-swiper .swiper-button-next,
+.jovy-swiper .swiper-button-prev {
+  color: #d8b4fe !important; /* jovy-lila para la flecha */
+  background-color: rgba(15, 23, 42, 0.8) !important;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* 3. Aseguramos que el ícono interno tome el color correcto */
+.jovy-swiper .swiper-button-next svg,
+.jovy-swiper .swiper-button-prev svg {
+  width: 20px !important;
+  height: 20px !important;
+  fill: currentColor !important;
+}
+
+/* 4. Efecto Hover: Todo se vuelve celeste brillante al pasar el mouse */
+.jovy-swiper .swiper-button-next:hover,
+.jovy-swiper .swiper-button-prev:hover {
+  background-color: rgba(15, 23, 42, 1) !important;
+  border-color: #7dd3fc !important;
+  color: #7dd3fc !important; /* Cambia la flecha a jovy-celeste */
+}
+
+/* 5. Puntitos de Paginación */
+.jovy-swiper .swiper-pagination-bullet {
+  background-color: #94a3b8 !important; /* Gris slate para inactivos */
+  opacity: 0.4 !important;
+  width: 10px !important;
+  height: 10px !important;
+  transition: all 0.3s ease !important;
+}
+
+.jovy-swiper .swiper-pagination-bullet-active {
+  background-color: #7dd3fc !important; /* Celeste para el activo */
+  opacity: 1 !important;
+  box-shadow: 0 0 12px rgba(125, 211, 252, 0.8) !important; /* Resplandor */
+}
