@@ -1,73 +1,72 @@
-# React + TypeScript + Vite
+# 💜 JovyJS - Portafolio Profesional
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Project Banner](https://img.shields.io/badge/Status-Live-success?style=for-the-badge) ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-Currently, two official plugins are available:
+> **Ver Demo en Vivo:** [www.jovyjs.com](https://www.jovyjs.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Portafolio personal desarrollado como una **Single Page Application (SPA)** moderna, diseñada para mostrar mi experiencia como **Analista Programador** y **Desarrolladora Full Stack Java**.
 
-## React Compiler
+El proyecto destaca por su estética *"Soft Cyberpunk"* (tonos lila/celeste pastel sobre fondo oscuro) y su arquitectura ligera.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Características Principales
 
-## Expanding the ESLint configuration
+* **🌐 Bilingüe (ES/EN):** Sistema de internacionalización personalizado con gestión de estado en React.
+* **🎨 UI Moderna:** Diseño totalmente responsivo utilizando **Tailwind CSS** con efectos de *Glassmorphism* y gradientes personalizados (`jovy-lila`, `jovy-celeste`).
+* **⚡ Performance:** Construido con **Vite** para una carga ultrarrápida.
+* **📊 Analítica:** Integración con Google Analytics 4 (GA4).
+* **🚀 CI/CD:** Despliegue automatizado mediante **GitHub Pages**.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Stack Tecnológico
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+* **Core:** React 18 + TypeScript
+* **Estilos:** Tailwind CSS
+* **Build Tool:** Vite
+* **Hosting & DNS:** GitHub Pages + Porkbun
+* **Control de Versiones:** Git & GitHub
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📂 Estructura del Proyecto
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+src/
+├── components/      # Componentes reutilizables (Card, Buttons)
+├── App.tsx          # Lógica principal y Diccionario de Traducciones
+├── index.css        # Configuración de Tailwind y fuentes
+└── main.tsx         # Punto de entrada de React
+public/
+├── CNAME            # Configuración de dominio personalizado
+└── favicon.svg      # Branding
 ```
+<img width="1150" height="908" alt="Vista Previa del Proyecto" src="https://github.com/user-attachments/assets/a8f15f4f-6667-4bdb-9b85-01eaf6fe5e5c" />
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Instalación y Uso Local
+Si quieres clonar y ejecutar este proyecto en tu máquina local:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Clonar el repositorio:
+Bash
+```bash
+git clone https://github.com/jovyscript/portafolio-jovyjs.git
+cd portafolio-jovyjs
 ```
+Instalar dependencias:
+Bash
+```bash
+npm install
+```
+Ejecutar servidor de desarrollo:
+Bash
+```bash
+npm run dev
+```
+Construir para producción:
+Bash
+```bash
+npm run build
+```
+---
+👩‍💻 Autora
+JovyJS - Desarrolladora Full Stack & Analista
+📧 Contacto: hello@jovyjs.com
+🌐 Web: www.jovyjs.com
+
+Hecho con 💜 y mucho café.
+
